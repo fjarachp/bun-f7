@@ -1,0 +1,470 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language: es\n"
+"Language-Team: \n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. placeholder {0}: result.text
+#: apps/store/src/components/todo/todo-form.tsx:149
+msgid "\"{0}\" has been added to your list"
+msgstr "\"{0}\" se agregó a tu lista"
+
+#. placeholder {0}: deleted.text
+#: apps/store/src/components/todo/todo-delete.tsx:69
+msgid "\"{0}\" has been removed from your list"
+msgstr "\"{0}\" se eliminó de tu lista"
+
+#. placeholder {0}: result.text
+#: apps/store/src/components/todo/todo-form.tsx:148
+msgid "\"{0}\" has been updated"
+msgstr "\"{0}\" se actualizó"
+
+#: apps/store/src/components/common/content-layout.tsx:110
+msgid "Account"
+msgstr "Cuenta"
+
+#: apps/store/src/screens/todo/index.tsx:98
+msgid "Actions"
+msgstr "Acciones"
+
+#: apps/store/src/components/todo/todo-detail.tsx:123
+#: apps/store/src/components/todo/todo-form.tsx:241
+#: apps/store/src/screens/todo/index.tsx:95
+#: apps/store/src/screens/todo/index.tsx:136
+msgid "Active"
+msgstr "Activo"
+
+#: apps/store/src/components/todo/todo-detail.tsx:114
+msgid "Active State"
+msgstr "Estado activo"
+
+#: apps/store/src/components/todo/todo-form.tsx:168
+msgid "Add a new task to your todo list"
+msgstr "Agrega una nueva tarea a tu lista"
+
+#: apps/store/src/screens/todo/index.tsx:62
+msgid "Add Todo"
+msgstr "Agregar tarea"
+
+#: apps/store/src/components/auth/user-menu.tsx:66
+msgid "An unexpected error occurred during sign out. {error}"
+msgstr "Ocurrió un error inesperado al cerrar sesión. {error}"
+
+#: apps/store/src/components/todo/todo-delete.tsx:80
+msgid "Are you absolutely sure?"
+msgstr "¿Estás completamente seguro?"
+
+#: apps/store/src/components/common/content-layout.tsx:114
+msgid "Billing"
+msgstr "Facturación"
+
+#: apps/store/src/screens/auth/index.tsx:49
+msgid "By clicking continue, you agree to our Terms of Service and Privacy Policy."
+msgstr "Al hacer clic en continuar, aceptas nuestros Términos de servicio y Política de privacidad."
+
+#: apps/store/src/components/todo/todo-delete.tsx:90
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: apps/store/src/components/todo/todo-detail.tsx:53
+#: apps/store/src/components/todo/todo-form.tsx:226
+#: apps/store/src/screens/todo/index.tsx:46
+msgid "Completed"
+msgstr "Completado"
+
+#: apps/store/src/components/auth/register.tsx:148
+msgid "Confirm Password"
+msgstr "Confirmar contraseña"
+
+#: apps/store/src/components/todo/todo-form.tsx:162
+msgid "Create New Todo"
+msgstr "Crear nueva tarea"
+
+#: apps/store/src/components/todo/todo-form.tsx:254
+msgid "Create Todo"
+msgstr "Crear tarea"
+
+#: apps/store/src/screens/todo/index.tsx:76
+msgid "Create your first todo"
+msgstr "Crea tu primera tarea"
+
+#: apps/store/src/components/todo/todo-detail.tsx:133
+msgid "Created At"
+msgstr "Creado el"
+
+#: apps/store/src/components/todo/todo-form.tsx:144
+msgid "Creating todo..."
+msgstr "Creando tarea..."
+
+#: apps/store/src/components/common/content-layout.tsx:102
+#: apps/store/src/routes/protected.tsx:39
+msgid "Dashboard"
+msgstr "Panel"
+
+#: apps/store/src/components/todo/todo-delete.tsx:93
+#: apps/store/src/components/todo/todo-detail.tsx:76
+#: apps/store/src/screens/todo/index.tsx:156
+msgid "Delete"
+msgstr "Eliminar"
+
+#: apps/store/src/components/todo/todo-delete.tsx:68
+msgid "Deleting todo..."
+msgstr "Eliminando tarea..."
+
+#: apps/store/src/components/todo/todo-detail.tsx:91
+#: apps/store/src/components/todo/todo-form.tsx:195
+#: apps/store/src/screens/todo/index.tsx:89
+msgid "Description"
+msgstr "Descripción"
+
+#: apps/store/src/components/auth/login.tsx:125
+msgid "Don't have an account? Sign up"
+msgstr "¿No tienes una cuenta? Regístrate"
+
+#: apps/store/src/components/todo/todo-detail.tsx:70
+#: apps/store/src/screens/todo/index.tsx:150
+msgid "Edit"
+msgstr "Editar"
+
+#: apps/store/src/components/todo/todo-form.tsx:162
+msgid "Edit Todo"
+msgstr "Editar tarea"
+
+#: apps/store/src/components/auth/login.tsx:68
+#: apps/store/src/components/auth/register.tsx:97
+msgid "Email"
+msgstr "Correo electrónico"
+
+#: apps/store/src/components/common/language-toggle.tsx:49
+msgid "English"
+msgstr "Inglés"
+
+#: apps/store/src/components/todo/todo-form.tsx:198
+msgid "Enter optional description"
+msgstr "Ingresa una descripción opcional"
+
+#: apps/store/src/components/todo/todo-form.tsx:183
+msgid "Enter task description"
+msgstr "Ingresa la descripción de la tarea"
+
+#. placeholder {0}: err.message
+#: apps/store/src/components/todo/todo-form.tsx:152
+msgid "Error creating todo: {0}"
+msgstr "Error al crear la tarea: {0}"
+
+#. placeholder {0}: err.message
+#: apps/store/src/components/todo/todo-delete.tsx:70
+msgid "Error deleting todo: {0}"
+msgstr "Error al eliminar la tarea: {0}"
+
+#: apps/store/src/routes/todo/index.tsx:34
+msgid "Error Loading Todos"
+msgstr "Error al cargar tareas"
+
+#. placeholder {0}: err.message
+#: apps/store/src/components/todo/todo-form.tsx:152
+msgid "Error updating todo: {0}"
+msgstr "Error al actualizar la tarea: {0}"
+
+#: apps/store/src/components/common/language-toggle.tsx:50
+msgid "Español"
+msgstr "Español"
+
+#: apps/store/src/components/common/content-layout.tsx:41
+msgid "Failed to log out. Please try again."
+msgstr "No se pudo cerrar sesión. Inténtalo de nuevo."
+
+#: apps/store/src/components/auth/user-menu.tsx:62
+msgid "Failed to sign out. Please try again."
+msgstr "No se pudo cerrar sesión. Inténtalo de nuevo."
+
+#: apps/store/src/components/common/language-toggle.tsx:51
+msgid "Français"
+msgstr ""
+
+#: apps/store/src/components/auth/register.tsx:81
+msgid "Full Name"
+msgstr "Nombre completo"
+
+#: apps/store/src/components/common/not-found.tsx:44
+#: apps/store/src/components/default-catch-boundary.tsx:65
+msgid "Go Back"
+msgstr "Volver"
+
+#: apps/store/src/components/common/not-found.tsx:48
+msgid "Go Home"
+msgstr "Ir al inicio"
+
+#: apps/store/src/components/default-catch-boundary.tsx:54
+msgid "Home"
+msgstr "Inicio"
+
+#: apps/store/src/components/todo/todo-detail.tsx:51
+#: apps/store/src/components/todo/todo-form.tsx:223
+#: apps/store/src/screens/todo/index.tsx:44
+msgid "In Progress"
+msgstr "En progreso"
+
+#: apps/store/src/components/todo/todo-detail.tsx:123
+#: apps/store/src/screens/todo/index.tsx:136
+msgid "Inactive"
+msgstr "Inactivo"
+
+#: apps/store/src/routes/todo/$todoId.tsx:46
+msgid "Invalid Todo ID"
+msgstr "ID de tarea no válido"
+
+#: apps/store/src/components/common/language-toggle.tsx:80
+#: apps/store/src/components/common/language-toggle.tsx:86
+msgid "Language"
+msgstr "Idioma"
+
+#: apps/store/src/components/todo/todo-detail.tsx:140
+msgid "Last Updated"
+msgstr "Última actualización"
+
+#: apps/store/src/routes/todo/$todoId.tsx:71
+msgid "Loading todo details..."
+msgstr "Cargando detalles de la tarea..."
+
+#: apps/store/src/routes/todo/index.tsx:52
+msgid "Loading todos..."
+msgstr "Cargando tareas..."
+
+#: apps/store/src/components/default-loading.tsx:9
+msgid "Loading..."
+msgstr "Cargando..."
+
+#: apps/store/src/components/auth/user-menu.tsx:104
+#: apps/store/src/components/common/content-layout.tsx:124
+msgid "Log out"
+msgstr "Cerrar sesión"
+
+#: apps/store/src/components/common/content-layout.tsx:40
+msgid "Logged out successfully"
+msgstr "Sesión cerrada correctamente"
+
+#: apps/store/src/components/auth/login.tsx:117
+msgid "Logging in..."
+msgstr "Iniciando sesión..."
+
+#: apps/store/src/components/common/content-layout.tsx:39
+msgid "Logging out..."
+msgstr "Cerrando sesión..."
+
+#: apps/store/src/components/auth/login.tsx:120
+#: apps/store/src/components/common/content-layout.tsx:132
+#: apps/store/src/screens/auth/index.tsx:32
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: apps/store/src/screens/auth/index.tsx:25
+msgid "Login with your Apple or Google account"
+msgstr "Inicia sesión con tu cuenta de Apple o Google"
+
+#: apps/store/src/components/todo/todo-form.tsx:166
+msgid "Make changes to your todo item"
+msgstr "Haz cambios en tu tarea"
+
+#: apps/store/src/routes/protected.tsx:62
+msgid "Manage your tasks and stay organized"
+msgstr "Gestiona tus tareas y mantente organizado"
+
+#: apps/store/src/components/common/content-layout.tsx:55
+msgid "Manage your tasks with TanStack Start, tRPC, PostgreSQL & React"
+msgstr "Gestiona tus tareas con TanStack Start, tRPC, PostgreSQL y React"
+
+#: apps/store/src/screens/todo/index.tsx:56
+msgid "My Todos"
+msgstr "Mis tareas"
+
+#: apps/store/src/components/auth/register.tsx:34
+msgid "Name must be at least 2 characters"
+msgstr "El nombre debe tener al menos 2 caracteres"
+
+#: apps/store/src/components/default-catch-boundary.tsx:22
+msgid "New version available"
+msgstr "Nueva versión disponible"
+
+#: apps/store/src/screens/todo/index.tsx:71
+msgid "No todos yet"
+msgstr "Aún no hay tareas"
+
+#: apps/store/src/components/todo/todo-detail.tsx:49
+#: apps/store/src/components/todo/todo-form.tsx:220
+#: apps/store/src/screens/todo/index.tsx:42
+msgid "Not Started"
+msgstr "No iniciada"
+
+#: apps/store/src/components/common/content-layout.tsx:118
+msgid "Notifications"
+msgstr "Notificaciones"
+
+#: apps/store/src/components/not-found.tsx:16
+msgid "Page not found"
+msgstr "Página no encontrada"
+
+#: apps/store/src/components/common/not-found.tsx:34
+msgid "Page Not Found"
+msgstr "Página no encontrada"
+
+#: apps/store/src/components/auth/login.tsx:84
+#: apps/store/src/components/auth/register.tsx:113
+msgid "Password"
+msgstr "Contraseña"
+
+#: apps/store/src/components/auth/login.tsx:31
+#: apps/store/src/components/auth/register.tsx:36
+msgid "Password must be at least 8 characters"
+msgstr "La contraseña debe tener al menos 8 caracteres"
+
+#: apps/store/src/components/auth/login.tsx:30
+#: apps/store/src/components/auth/register.tsx:35
+msgid "Please enter a valid email address"
+msgstr "Ingresa una dirección de correo válida"
+
+#: apps/store/src/components/auth/register.tsx:184
+msgid "Register"
+msgstr "Registrarse"
+
+#: apps/store/src/components/auth/register.tsx:181
+msgid "Registering..."
+msgstr "Registrando..."
+
+#: apps/store/src/components/default-catch-boundary.tsx:34
+msgid "Reload"
+msgstr "Recargar"
+
+#: apps/store/src/components/default-catch-boundary.tsx:25
+msgid "Reload this page to fetch the latest app files."
+msgstr "Recarga esta página para obtener los archivos más recientes de la app."
+
+#: apps/store/src/components/not-found.tsx:20
+msgid "Return to home"
+msgstr "Volver al inicio"
+
+#: apps/store/src/components/todo/todo-form.tsx:215
+msgid "Select status"
+msgstr "Selecciona un estado"
+
+#: apps/store/src/components/auth/user-menu.tsx:93
+msgid "Session ID"
+msgstr "ID de sesión"
+
+#: apps/store/src/components/todo/todo-form.tsx:244
+msgid "Set whether this todo is active"
+msgstr "Define si esta tarea está activa"
+
+#: apps/store/src/screens/auth/index.tsx:35
+msgid "Sign up"
+msgstr "Registrarse"
+
+#: apps/store/src/components/auth/user-menu.tsx:61
+msgid "Signed out successfully!"
+msgstr "¡Sesión cerrada correctamente!"
+
+#: apps/store/src/components/auth/user-menu.tsx:60
+msgid "Signing out..."
+msgstr "Cerrando sesión..."
+
+#: apps/store/src/components/todo/todo-detail.tsx:101
+#: apps/store/src/components/todo/todo-form.tsx:210
+#: apps/store/src/screens/todo/index.tsx:92
+msgid "Status"
+msgstr "Estado"
+
+#: apps/store/src/components/todo/todo-form.tsx:180
+#: apps/store/src/screens/todo/index.tsx:86
+msgid "Task"
+msgstr "Tarea"
+
+#: apps/store/src/components/common/not-found.tsx:37
+msgid "The page you are looking for does not exist or has been moved."
+msgstr "La página que buscas no existe o se movió."
+
+#: apps/store/src/routes/todo/$todoId.tsx:50
+msgid "The todo ID provided is not in the correct format."
+msgstr "El ID de tarea proporcionado no tiene el formato correcto."
+
+#: apps/store/src/routes/todo/$todoId.tsx:66
+msgid "The todo you're looking for doesn't exist."
+msgstr "La tarea que buscas no existe."
+
+#: apps/store/src/routes/todo/index.tsx:47
+msgid "The todos page could not be found."
+msgstr "No se pudo encontrar la página de tareas."
+
+#: apps/store/src/components/auth/register.tsx:40
+msgid "The two passwords do not match."
+msgstr "Las dos contraseñas no coinciden."
+
+#. placeholder {0}: todo.text
+#: apps/store/src/components/todo/todo-delete.tsx:83
+msgid "This action cannot be undone. This will permanently delete the todo \"{0}\"."
+msgstr "Esta acción no se puede deshacer. Esto eliminará permanentemente la tarea \"{0}\"."
+
+#: apps/store/src/components/todo/todo-detail.tsx:64
+msgid "Todo Details"
+msgstr "Detalles de la tarea"
+
+#: apps/store/src/components/todo/todo-detail.tsx:150
+msgid "Todo ID"
+msgstr "ID de tarea"
+
+#: apps/store/src/routes/todo/$todoId.tsx:46
+#: apps/store/src/routes/todo/$todoId.tsx:63
+msgid "Todo Not Found"
+msgstr "Tarea no encontrada"
+
+#: apps/store/src/components/todo/todo-form.tsx:146
+msgid "Todo saved successfully"
+msgstr "Tarea guardada correctamente"
+
+#: apps/store/src/routes/todo/index.tsx:44
+msgid "Todos Not Found"
+msgstr "Tareas no encontradas"
+
+#: apps/store/src/components/default-catch-boundary.tsx:50
+msgid "Try Again"
+msgstr "Intentar de nuevo"
+
+#: apps/store/src/components/todo/todo-detail.tsx:55
+#: apps/store/src/screens/todo/index.tsx:48
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: apps/store/src/components/todo/todo-form.tsx:254
+msgid "Update Todo"
+msgstr "Actualizar tarea"
+
+#: apps/store/src/components/todo/todo-form.tsx:144
+msgid "Updating todo..."
+msgstr "Actualizando tarea..."
+
+#: apps/store/src/screens/todo/index.tsx:144
+msgid "View"
+msgstr "Ver"
+
+#: apps/store/src/screens/auth/index.tsx:22
+msgid "Welcome back"
+msgstr "Bienvenido de nuevo"
+
+#. placeholder {0}: auth.user?.name
+#: apps/store/src/routes/protected.tsx:42
+msgid "Welcome back, {0}"
+msgstr "Bienvenido de nuevo, {0}"
+
+#: apps/store/src/routes/index.tsx:13
+msgid "Welcome to the Store!"
+msgstr "¡Bienvenido a la tienda!"
+
+#: apps/store/src/routes/protected.tsx:59
+msgid "Your Todos"
+msgstr "Tus tareas"

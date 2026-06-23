@@ -1,0 +1,71 @@
+import { UserMenu } from "@apps/store/components/auth/user-menu";
+import { Trans } from "@lingui/react/macro";
+import { Separator } from "@repo/ui/components/separator";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
+import { authMiddleware } from "../middleware/auth";
+import { Route as MainRoute } from "../routes/__root";
+
+export const Route = createFileRoute("/protected")({
+  component: RouteComponent,
+  beforeLoad: ({ context }) => {
+    // Handles client-side navigation (back button, link clicks)
+    if (!context.auth?.user) {
+      throw redirect({ to: "/" });
+    }
+  },
+  server: {
+    middleware: [authMiddleware],
+  },
+});
+
+function RouteComponent() {
+  const { auth } = MainRoute.useRouteContext();
+  console.log("auth", auth);
+  return (
+    <div className="min-h-screen space-y-4 bg-background">
+      {/* Header */}
+      <header className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3">
+                <Link to="/">
+                  <div className="rounded-lg bg-black p-2 text-white">
+                    <div className="h-6 w-6 rounded-sm bg-white" />
+                  </div>
+                </Link>
+                <div>
+                  <h1 className="font-semibold text-xl">
+                    <Trans>Dashboard</Trans>
+                  </h1>
+                  <p className="text-muted-foreground text-sm">
+                    <Trans>Welcome back, {auth.user?.name}</Trans>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <UserMenu auth={auth} />
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="flex flex-col gap-4">
+        <div className="space-y-6">
+          {/* Page Title */}
+          <div className="space-y-2">
+            <h2 className="font-bold text-3xl tracking-tight">
+              <Trans>Your Todos</Trans>
+            </h2>
+            <p className="text-muted-foreground">
+              <Trans>Manage your tasks and stay organized</Trans>
+            </p>
+          </div>
+
+          <Separator />
+        </div>
+      </main>
+    </div>
+  );
+}

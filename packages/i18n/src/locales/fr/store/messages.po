@@ -1,0 +1,472 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-05-03 20:13-0400\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: fr\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#. placeholder {0}: result.text
+#: apps/store/src/components/todo/todo-form.tsx:149
+msgid "\"{0}\" has been added to your list"
+msgstr "« {0} » a été ajouté à votre liste"
+
+#. placeholder {0}: deleted.text
+#: apps/store/src/components/todo/todo-delete.tsx:69
+msgid "\"{0}\" has been removed from your list"
+msgstr "« {0} » a été supprimé de votre liste"
+
+#. placeholder {0}: result.text
+#: apps/store/src/components/todo/todo-form.tsx:148
+msgid "\"{0}\" has been updated"
+msgstr "« {0} » a été mis à jour"
+
+#: apps/store/src/components/common/content-layout.tsx:110
+msgid "Account"
+msgstr "Compte"
+
+#: apps/store/src/screens/todo/index.tsx:98
+msgid "Actions"
+msgstr "Actions"
+
+#: apps/store/src/components/todo/todo-detail.tsx:123
+#: apps/store/src/components/todo/todo-form.tsx:241
+#: apps/store/src/screens/todo/index.tsx:95
+#: apps/store/src/screens/todo/index.tsx:136
+msgid "Active"
+msgstr "Actif"
+
+#: apps/store/src/components/todo/todo-detail.tsx:114
+msgid "Active State"
+msgstr "État actif"
+
+#: apps/store/src/components/todo/todo-form.tsx:168
+msgid "Add a new task to your todo list"
+msgstr "Ajoutez une nouvelle tâche à votre liste"
+
+#: apps/store/src/screens/todo/index.tsx:62
+msgid "Add Todo"
+msgstr "Ajouter une tâche"
+
+#: apps/store/src/components/auth/user-menu.tsx:66
+msgid "An unexpected error occurred during sign out. {error}"
+msgstr "Une erreur inattendue s’est produite lors de la déconnexion. {error}"
+
+#: apps/store/src/components/todo/todo-delete.tsx:80
+msgid "Are you absolutely sure?"
+msgstr "Êtes-vous absolument sûr ?"
+
+#: apps/store/src/components/common/content-layout.tsx:114
+msgid "Billing"
+msgstr "Facturation"
+
+#: apps/store/src/screens/auth/index.tsx:49
+msgid "By clicking continue, you agree to our Terms of Service and Privacy Policy."
+msgstr "En cliquant sur Continuer, vous acceptez nos conditions d’utilisation et notre politique de confidentialité."
+
+#: apps/store/src/components/todo/todo-delete.tsx:90
+msgid "Cancel"
+msgstr "Annuler"
+
+#: apps/store/src/components/todo/todo-detail.tsx:53
+#: apps/store/src/components/todo/todo-form.tsx:226
+#: apps/store/src/screens/todo/index.tsx:46
+msgid "Completed"
+msgstr "Terminé"
+
+#: apps/store/src/components/auth/register.tsx:148
+msgid "Confirm Password"
+msgstr "Confirmer le mot de passe"
+
+#: apps/store/src/components/todo/todo-form.tsx:162
+msgid "Create New Todo"
+msgstr "Créer une nouvelle tâche"
+
+#: apps/store/src/components/todo/todo-form.tsx:254
+msgid "Create Todo"
+msgstr "Créer une tâche"
+
+#: apps/store/src/screens/todo/index.tsx:76
+msgid "Create your first todo"
+msgstr "Créez votre première tâche"
+
+#: apps/store/src/components/todo/todo-detail.tsx:133
+msgid "Created At"
+msgstr "Créé le"
+
+#: apps/store/src/components/todo/todo-form.tsx:144
+msgid "Creating todo..."
+msgstr "Création de la tâche..."
+
+#: apps/store/src/components/common/content-layout.tsx:102
+#: apps/store/src/routes/protected.tsx:39
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+#: apps/store/src/components/todo/todo-delete.tsx:93
+#: apps/store/src/components/todo/todo-detail.tsx:76
+#: apps/store/src/screens/todo/index.tsx:156
+msgid "Delete"
+msgstr "Supprimer"
+
+#: apps/store/src/components/todo/todo-delete.tsx:68
+msgid "Deleting todo..."
+msgstr "Suppression de la tâche..."
+
+#: apps/store/src/components/todo/todo-detail.tsx:91
+#: apps/store/src/components/todo/todo-form.tsx:195
+#: apps/store/src/screens/todo/index.tsx:89
+msgid "Description"
+msgstr "Description"
+
+#: apps/store/src/components/auth/login.tsx:125
+msgid "Don't have an account? Sign up"
+msgstr "Vous n’avez pas de compte ? Inscrivez-vous"
+
+#: apps/store/src/components/todo/todo-detail.tsx:70
+#: apps/store/src/screens/todo/index.tsx:150
+msgid "Edit"
+msgstr "Modifier"
+
+#: apps/store/src/components/todo/todo-form.tsx:162
+msgid "Edit Todo"
+msgstr "Modifier la tâche"
+
+#: apps/store/src/components/auth/login.tsx:68
+#: apps/store/src/components/auth/register.tsx:97
+msgid "Email"
+msgstr "E-mail"
+
+#: apps/store/src/components/common/language-toggle.tsx:49
+msgid "English"
+msgstr "Anglais"
+
+#: apps/store/src/components/todo/todo-form.tsx:198
+msgid "Enter optional description"
+msgstr "Saisissez une description facultative"
+
+#: apps/store/src/components/todo/todo-form.tsx:183
+msgid "Enter task description"
+msgstr "Saisissez la description de la tâche"
+
+#. placeholder {0}: err.message
+#: apps/store/src/components/todo/todo-form.tsx:152
+msgid "Error creating todo: {0}"
+msgstr "Erreur lors de la création de la tâche : {0}"
+
+#. placeholder {0}: err.message
+#: apps/store/src/components/todo/todo-delete.tsx:70
+msgid "Error deleting todo: {0}"
+msgstr "Erreur lors de la suppression de la tâche : {0}"
+
+#: apps/store/src/routes/todo/index.tsx:34
+msgid "Error Loading Todos"
+msgstr "Erreur lors du chargement des tâches"
+
+#. placeholder {0}: err.message
+#: apps/store/src/components/todo/todo-form.tsx:152
+msgid "Error updating todo: {0}"
+msgstr "Erreur lors de la mise à jour de la tâche : {0}"
+
+#: apps/store/src/components/common/language-toggle.tsx:50
+msgid "Español"
+msgstr "Espagnol"
+
+#: apps/store/src/components/common/content-layout.tsx:41
+msgid "Failed to log out. Please try again."
+msgstr "Échec de la déconnexion. Veuillez réessayer."
+
+#: apps/store/src/components/auth/user-menu.tsx:62
+msgid "Failed to sign out. Please try again."
+msgstr "Échec de la déconnexion. Veuillez réessayer."
+
+#: apps/store/src/components/common/language-toggle.tsx:51
+msgid "Français"
+msgstr "Français"
+
+#: apps/store/src/components/auth/register.tsx:81
+msgid "Full Name"
+msgstr "Nom complet"
+
+#: apps/store/src/components/common/not-found.tsx:44
+#: apps/store/src/components/default-catch-boundary.tsx:65
+msgid "Go Back"
+msgstr "Retour"
+
+#: apps/store/src/components/common/not-found.tsx:48
+msgid "Go Home"
+msgstr "Aller à l’accueil"
+
+#: apps/store/src/components/default-catch-boundary.tsx:54
+msgid "Home"
+msgstr "Accueil"
+
+#: apps/store/src/components/todo/todo-detail.tsx:51
+#: apps/store/src/components/todo/todo-form.tsx:223
+#: apps/store/src/screens/todo/index.tsx:44
+msgid "In Progress"
+msgstr "En cours"
+
+#: apps/store/src/components/todo/todo-detail.tsx:123
+#: apps/store/src/screens/todo/index.tsx:136
+msgid "Inactive"
+msgstr "Inactif"
+
+#: apps/store/src/routes/todo/$todoId.tsx:46
+msgid "Invalid Todo ID"
+msgstr "ID de tâche non valide"
+
+#: apps/store/src/components/common/language-toggle.tsx:80
+#: apps/store/src/components/common/language-toggle.tsx:86
+msgid "Language"
+msgstr "Langue"
+
+#: apps/store/src/components/todo/todo-detail.tsx:140
+msgid "Last Updated"
+msgstr "Dernière mise à jour"
+
+#: apps/store/src/routes/todo/$todoId.tsx:71
+msgid "Loading todo details..."
+msgstr "Chargement des détails de la tâche..."
+
+#: apps/store/src/routes/todo/index.tsx:52
+msgid "Loading todos..."
+msgstr "Chargement des tâches..."
+
+#: apps/store/src/components/default-loading.tsx:9
+msgid "Loading..."
+msgstr "Chargement..."
+
+#: apps/store/src/components/auth/user-menu.tsx:104
+#: apps/store/src/components/common/content-layout.tsx:124
+msgid "Log out"
+msgstr "Se déconnecter"
+
+#: apps/store/src/components/common/content-layout.tsx:40
+msgid "Logged out successfully"
+msgstr "Déconnexion réussie"
+
+#: apps/store/src/components/auth/login.tsx:117
+msgid "Logging in..."
+msgstr "Connexion..."
+
+#: apps/store/src/components/common/content-layout.tsx:39
+msgid "Logging out..."
+msgstr "Déconnexion..."
+
+#: apps/store/src/components/auth/login.tsx:120
+#: apps/store/src/components/common/content-layout.tsx:132
+#: apps/store/src/screens/auth/index.tsx:32
+msgid "Login"
+msgstr "Connexion"
+
+#: apps/store/src/screens/auth/index.tsx:25
+msgid "Login with your Apple or Google account"
+msgstr "Connectez-vous avec votre compte Apple ou Google"
+
+#: apps/store/src/components/todo/todo-form.tsx:166
+msgid "Make changes to your todo item"
+msgstr "Modifiez votre tâche"
+
+#: apps/store/src/routes/protected.tsx:62
+msgid "Manage your tasks and stay organized"
+msgstr "Gérez vos tâches et restez organisé"
+
+#: apps/store/src/components/common/content-layout.tsx:55
+msgid "Manage your tasks with TanStack Start, tRPC, PostgreSQL & React"
+msgstr "Gérez vos tâches avec TanStack Start, tRPC, PostgreSQL et React"
+
+#: apps/store/src/screens/todo/index.tsx:56
+msgid "My Todos"
+msgstr "Mes tâches"
+
+#: apps/store/src/components/auth/register.tsx:34
+msgid "Name must be at least 2 characters"
+msgstr "Le nom doit contenir au moins 2 caractères"
+
+#: apps/store/src/components/default-catch-boundary.tsx:22
+msgid "New version available"
+msgstr "Nouvelle version disponible"
+
+#: apps/store/src/screens/todo/index.tsx:71
+msgid "No todos yet"
+msgstr "Aucune tâche pour le moment"
+
+#: apps/store/src/components/todo/todo-detail.tsx:49
+#: apps/store/src/components/todo/todo-form.tsx:220
+#: apps/store/src/screens/todo/index.tsx:42
+msgid "Not Started"
+msgstr "Non commencé"
+
+#: apps/store/src/components/common/content-layout.tsx:118
+msgid "Notifications"
+msgstr "Notifications"
+
+#: apps/store/src/components/not-found.tsx:16
+msgid "Page not found"
+msgstr "Page introuvable"
+
+#: apps/store/src/components/common/not-found.tsx:34
+msgid "Page Not Found"
+msgstr "Page introuvable"
+
+#: apps/store/src/components/auth/login.tsx:84
+#: apps/store/src/components/auth/register.tsx:113
+msgid "Password"
+msgstr "Mot de passe"
+
+#: apps/store/src/components/auth/login.tsx:31
+#: apps/store/src/components/auth/register.tsx:36
+msgid "Password must be at least 8 characters"
+msgstr "Le mot de passe doit contenir au moins 8 caractères"
+
+#: apps/store/src/components/auth/login.tsx:30
+#: apps/store/src/components/auth/register.tsx:35
+msgid "Please enter a valid email address"
+msgstr "Veuillez saisir une adresse e-mail valide"
+
+#: apps/store/src/components/auth/register.tsx:184
+msgid "Register"
+msgstr "S’inscrire"
+
+#: apps/store/src/components/auth/register.tsx:181
+msgid "Registering..."
+msgstr "Inscription..."
+
+#: apps/store/src/components/default-catch-boundary.tsx:34
+msgid "Reload"
+msgstr "Recharger"
+
+#: apps/store/src/components/default-catch-boundary.tsx:25
+msgid "Reload this page to fetch the latest app files."
+msgstr "Rechargez cette page pour récupérer les derniers fichiers de l’application."
+
+#: apps/store/src/components/not-found.tsx:20
+msgid "Return to home"
+msgstr "Retour à l’accueil"
+
+#: apps/store/src/components/todo/todo-form.tsx:215
+msgid "Select status"
+msgstr "Sélectionner un statut"
+
+#: apps/store/src/components/auth/user-menu.tsx:93
+msgid "Session ID"
+msgstr "ID de session"
+
+#: apps/store/src/components/todo/todo-form.tsx:244
+msgid "Set whether this todo is active"
+msgstr "Définir si cette tâche est active"
+
+#: apps/store/src/screens/auth/index.tsx:35
+msgid "Sign up"
+msgstr "S’inscrire"
+
+#: apps/store/src/components/auth/user-menu.tsx:61
+msgid "Signed out successfully!"
+msgstr "Déconnexion réussie !"
+
+#: apps/store/src/components/auth/user-menu.tsx:60
+msgid "Signing out..."
+msgstr "Déconnexion..."
+
+#: apps/store/src/components/todo/todo-detail.tsx:101
+#: apps/store/src/components/todo/todo-form.tsx:210
+#: apps/store/src/screens/todo/index.tsx:92
+msgid "Status"
+msgstr "Statut"
+
+#: apps/store/src/components/todo/todo-form.tsx:180
+#: apps/store/src/screens/todo/index.tsx:86
+msgid "Task"
+msgstr "Tâche"
+
+#: apps/store/src/components/common/not-found.tsx:37
+msgid "The page you are looking for does not exist or has been moved."
+msgstr "La page que vous recherchez n’existe pas ou a été déplacée."
+
+#: apps/store/src/routes/todo/$todoId.tsx:50
+msgid "The todo ID provided is not in the correct format."
+msgstr "L’ID de tâche fourni n’est pas au bon format."
+
+#: apps/store/src/routes/todo/$todoId.tsx:66
+msgid "The todo you're looking for doesn't exist."
+msgstr "La tâche que vous recherchez n’existe pas."
+
+#: apps/store/src/routes/todo/index.tsx:47
+msgid "The todos page could not be found."
+msgstr "La page des tâches est introuvable."
+
+#: apps/store/src/components/auth/register.tsx:40
+msgid "The two passwords do not match."
+msgstr "Les deux mots de passe ne correspondent pas."
+
+#. placeholder {0}: todo.text
+#: apps/store/src/components/todo/todo-delete.tsx:83
+msgid "This action cannot be undone. This will permanently delete the todo \"{0}\"."
+msgstr "Cette action est irréversible. Cela supprimera définitivement la tâche « {0} »."
+
+#: apps/store/src/components/todo/todo-detail.tsx:64
+msgid "Todo Details"
+msgstr "Détails de la tâche"
+
+#: apps/store/src/components/todo/todo-detail.tsx:150
+msgid "Todo ID"
+msgstr "ID de tâche"
+
+#: apps/store/src/routes/todo/$todoId.tsx:46
+#: apps/store/src/routes/todo/$todoId.tsx:63
+msgid "Todo Not Found"
+msgstr "Tâche introuvable"
+
+#: apps/store/src/components/todo/todo-form.tsx:146
+msgid "Todo saved successfully"
+msgstr "Tâche enregistrée avec succès"
+
+#: apps/store/src/routes/todo/index.tsx:44
+msgid "Todos Not Found"
+msgstr "Tâches introuvables"
+
+#: apps/store/src/components/default-catch-boundary.tsx:50
+msgid "Try Again"
+msgstr "Réessayer"
+
+#: apps/store/src/components/todo/todo-detail.tsx:55
+#: apps/store/src/screens/todo/index.tsx:48
+msgid "Unknown"
+msgstr "Inconnu"
+
+#: apps/store/src/components/todo/todo-form.tsx:254
+msgid "Update Todo"
+msgstr "Mettre à jour la tâche"
+
+#: apps/store/src/components/todo/todo-form.tsx:144
+msgid "Updating todo..."
+msgstr "Mise à jour de la tâche..."
+
+#: apps/store/src/screens/todo/index.tsx:144
+msgid "View"
+msgstr "Voir"
+
+#: apps/store/src/screens/auth/index.tsx:22
+msgid "Welcome back"
+msgstr "Bon retour"
+
+#. placeholder {0}: auth.user?.name
+#: apps/store/src/routes/protected.tsx:42
+msgid "Welcome back, {0}"
+msgstr "Bon retour, {0}"
+
+#: apps/store/src/routes/index.tsx:13
+msgid "Welcome to the Store!"
+msgstr "Bienvenue dans la boutique !"
+
+#: apps/store/src/routes/protected.tsx:59
+msgid "Your Todos"
+msgstr "Vos tâches"

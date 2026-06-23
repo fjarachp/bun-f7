@@ -1,0 +1,58 @@
+{
+  "name": "@repo/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./client": {
+      "types": "./src/client/index.ts",
+      "default": "./src/client/index.ts"
+    },
+    "./server": {
+      "types": "./src/server/index.ts",
+      "default": "./src/server/index.ts"
+    },
+    "./server/runtime": {
+      "types": "./src/server/runtime/index.ts",
+      "default": "./src/server/runtime/index.ts"
+    },
+    "./server/i18n/*": {
+      "types": "./src/server/i18n/*.ts",
+      "default": "./src/server/i18n/*.ts"
+    },
+    "./server/services/*": {
+      "types": "./src/server/services/*.ts",
+      "default": "./src/server/services/*.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsgo",
+    "clean": "rm -rf node_modules dist .turbo .cache",
+    "dev": "tsgo",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "format:unsafe": "bun run lint:fix:unsafe && bun run format",
+    "lint": "oxlint -c ../../.oxlintrc.json .",
+    "lint:fix": "oxlint -c ../../.oxlintrc.json --fix .",
+    "lint:fix:unsafe": "oxlint -c ../../.oxlintrc.json --fix-dangerously .",
+    "typecheck": "tsgo --noEmit"
+  },
+  "dependencies": {
+    "@repo/auth": "workspace:*",
+    "@repo/db": "workspace:*",
+    "@repo/i18n": "workspace:*",
+    "@trpc/client": "catalog:",
+    "@trpc/server": "catalog:",
+    "@trpc/tanstack-react-query": "catalog:",
+    "effect": "catalog:",
+    "superjson": "catalog:",
+    "url-join": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@typescript/native-preview": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}

@@ -1,0 +1,110 @@
+import { type Auth, authClient } from "@apps/store/clients/auth-client";
+import { useTRPC } from "@apps/store/trpc/react";
+import { Trans, useLingui } from "@lingui/react/macro";
+import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui/components/avatar";
+import { Button } from "@repo/ui/components/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@repo/ui/components/dropdown-menu";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "@tanstack/react-router";
+import { LogOut, User as UserIcon } from "lucide-react";
+import { toast } from "sonner";
+
+type UserMenuProps = {
+  auth: Auth | null;
+};
+
+export function UserMenu({ auth }: UserMenuProps) {
+  const { t } = useLingui();
+  const queryClient = useQueryClient();
+  const trpc = useTRPC();
+  const router = useRouter();
+  const user = auth?.user;
+  const session = auth?.session;
+  if (!user) {
+    return null;
+  }
+
+  const getInitials = (name: string) =>
+    name
+      .split(" ")
+      .map((part) => part.charAt(0))
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+
+  const handleLogout = () => {
+    try {
+      toast.promise(
+        authClient.signOut({
+          fetchOptions: {
+            onSuccess: async () => {
+              // Remove the currentUser query to completely clear cache
+              queryClient.removeQueries({
+                queryKey: [trpc.auth.getSession.queryKey()],
+              });
+
+              await router.navigate({
+                to: "/",
+              });
+            },
+          },
+        }),
+        {
+          loading: t`Signing out...`,
+          success: t`Signed out successfully!`,
+          error: t`Failed to sign out. Please try again.`,
+        },
+      );
+    } catch (error) {
+      toast.error(t`An unexpected error occurred during sign out. ${error}`);
+    }
+  };
+
+  return (
+    <DropdownMenu modal={false}>
+      <DropdownMenuTrigger asChild>
+        <Button className="relative h-8 w-8 rounded-full" variant="ghost">
+          <Avatar className="h-8 w-8">
+            <AvatarImage alt={user.name} src={user.image || undefined} />
+            <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
+          </Avatar>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-56" forceMount>
+        <DropdownMenuLabel className="font-normal">
+          <div className="flex flex-col space-y-1">
+            <p className="font-medium text-sm leading-none">{user.name}</p>
+            <p className="text-muted-foreground text-xs leading-none">{user.email}</p>
+          </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem disabled>
+          <UserIcon className="mr-2 h-4 w-4" />
+          <div className="flex flex-col">
+            <span className="text-muted-foreground text-xs">
+              <Trans>Session ID</Trans>
+            </span>
+            <span className="font-mono text-xs">{session?.id.slice(0, 8)}...</span>
+          </div>
+        </DropdownMenuItem>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem onClick={handleLogout}>
+          <LogOut className="mr-2 h-4 w-4" />
+          <span>
+            <Trans>Log out</Trans>
+          </span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": false,
+  "trailingComma": "all",
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/routeTree.gen.ts",
+    "**/.output/**",
+    "**/.tanstack/**",
+    "**/.turbo/**",
+    "**/coverage/**",
+    "**/dist/**",
+    "bun.lock",
+    "effect-smol/**"
+  ]
+}

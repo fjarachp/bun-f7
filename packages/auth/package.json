@@ -1,0 +1,42 @@
+{
+  "name": "@repo/auth",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./server": {
+      "types": "./src/server.ts",
+      "default": "./src/server.ts"
+    },
+    "./client": {
+      "types": "./src/client.ts",
+      "default": "./src/client.ts"
+    }
+  },
+  "scripts": {
+    "dev": "tsgo",
+    "build": "tsgo --build",
+    "lint": "oxlint -c ../../.oxlintrc.json .",
+    "lint:fix": "oxlint -c ../../.oxlintrc.json --fix .",
+    "lint:fix:unsafe": "oxlint -c ../../.oxlintrc.json --fix-dangerously .",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "format:unsafe": "bun run lint:fix:unsafe && bun run format",
+    "typecheck": "tsgo --noEmit",
+    "clean": "rm -rf node_modules dist .turbo .cache",
+    "auth:schema:generate": "bunx @better-auth/cli generate --config ./src/cli-config.ts --output ../db/src/schema/auth.ts"
+  },
+  "dependencies": {
+    "@repo/db": "*",
+    "@repo/email": "workspace:*",
+    "better-auth": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@better-auth/cli": "catalog:",
+    "@repo/typescript-config": "*",
+    "@types/node": "^25.6.0",
+    "@typescript/native-preview": "catalog:",
+    "typescript": "catalog:"
+  }
+}

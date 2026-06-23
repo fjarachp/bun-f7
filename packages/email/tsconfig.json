@@ -1,0 +1,10 @@
+{
+  "extends": "@repo/typescript-config/internal-bundler.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "jsx": "react-jsx",
+    "types": ["node"]
+  },
+  "include": ["src/**/*", "emails/**/*"],
+  "exclude": ["node_modules", "dist", ".react-email", "out"]
+}

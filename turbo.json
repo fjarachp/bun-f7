@@ -1,0 +1,155 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"]
+    },
+    "store#build": {
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".output/**"],
+      "env": [
+        "DATABASE_URL",
+        "PUBLIC_*",
+        "VITE_*",
+        "AUTH_SECRET",
+        "BETTER_AUTH_URL",
+        "AUTH_COOKIE_DOMAIN"
+      ]
+    },
+    "admin#build": {
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".output/**"],
+      "env": [
+        "DATABASE_URL",
+        "PUBLIC_*",
+        "VITE_*",
+        "AUTH_SECRET",
+        "BETTER_AUTH_URL",
+        "AUTH_COOKIE_DOMAIN"
+      ]
+    },
+    "server#build": {
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [],
+      "env": [
+        "DATABASE_URL",
+        "SERVER_*",
+        "PUBLIC_URL_STORE",
+        "PUBLIC_URL_ADMIN",
+        "AUTH_SECRET",
+        "BETTER_AUTH_URL",
+        "AUTH_COOKIE_DOMAIN",
+        "SENDGRID_API_KEY",
+        "SENDGRID_EVENT_WEBHOOK_SIGNING_KEY",
+        "EMAIL_FROM",
+        "EMAIL_API_KEY",
+        "EMAIL_API_URL",
+        "EMAIL_REPLY_TO"
+      ]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "typecheck": {
+      "dependsOn": ["^typecheck"]
+    },
+    "format": {
+      "dependsOn": ["^format"]
+    },
+    "format:check": {
+      "dependsOn": ["^format:check"]
+    },
+    "format:unsafe": {
+      "dependsOn": ["^format:unsafe"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "server#dev": {
+      "cache": false,
+      "persistent": true,
+      "env": [
+        "DATABASE_URL",
+        "SERVER_*",
+        "PUBLIC_URL_STORE",
+        "PUBLIC_URL_ADMIN",
+        "AUTH_SECRET",
+        "BETTER_AUTH_URL",
+        "AUTH_COOKIE_DOMAIN",
+        "SENDGRID_API_KEY",
+        "SENDGRID_EVENT_WEBHOOK_SIGNING_KEY",
+        "EMAIL_FROM",
+        "EMAIL_API_KEY",
+        "EMAIL_API_URL",
+        "EMAIL_REPLY_TO"
+      ]
+    },
+    "store#dev": {
+      "cache": false,
+      "persistent": true,
+      "env": [
+        "DATABASE_URL",
+        "PUBLIC_*",
+        "VITE_*",
+        "AUTH_SECRET",
+        "BETTER_AUTH_URL",
+        "AUTH_COOKIE_DOMAIN"
+      ]
+    },
+    "admin#dev": {
+      "cache": false,
+      "persistent": true,
+      "env": [
+        "DATABASE_URL",
+        "PUBLIC_*",
+        "VITE_*",
+        "AUTH_SECRET",
+        "BETTER_AUTH_URL",
+        "AUTH_COOKIE_DOMAIN"
+      ]
+    },
+    "clean": {
+      "cache": false
+    },
+    "docker:build": {
+      "dependsOn": ["build"],
+      "inputs": ["Dockerfile", "$TURBO_DEFAULT$"],
+      "cache": false
+    },
+    "server#docker:build": {
+      "dependsOn": ["server#build"],
+      "inputs": ["apps/server/Dockerfile", "$TURBO_DEFAULT$"],
+      "cache": false
+    },
+    "store#docker:build": {
+      "dependsOn": ["store#build"],
+      "inputs": ["apps/store/Dockerfile", "$TURBO_DEFAULT$"],
+      "cache": false
+    },
+    "admin#docker:build": {
+      "dependsOn": ["admin#build"],
+      "inputs": ["apps/admin/Dockerfile", "$TURBO_DEFAULT$"],
+      "cache": false
+    },
+    "db:push": {
+      "cache": false,
+      "env": ["DATABASE_URL"]
+    },
+    "db:studio": {
+      "cache": false,
+      "persistent": true,
+      "env": ["DATABASE_URL"]
+    },
+    "db:generate": {
+      "cache": false,
+      "env": ["DATABASE_URL"]
+    },
+    "db:migrate": {
+      "cache": false,
+      "env": ["DATABASE_URL"]
+    }
+  }
+}

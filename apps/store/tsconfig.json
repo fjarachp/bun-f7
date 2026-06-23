@@ -1,0 +1,14 @@
+{
+  "extends": "@repo/typescript-config/react-library",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@apps/store/*": ["./src/*"]
+    },
+    "noEmit": true
+  }
+}

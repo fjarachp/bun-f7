@@ -1,0 +1,131 @@
+{
+  "name": "@repo/i18n",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./react": {
+      "types": "./src/react.tsx",
+      "default": "./src/react.tsx"
+    },
+    "./server": {
+      "types": "./src/server.ts",
+      "default": "./src/server.ts"
+    },
+    "./locales/en/store/messages": {
+      "types": "./src/locales/en/store/messages.ts",
+      "default": "./src/locales/en/store/messages.ts"
+    },
+    "./locales/es/store/messages": {
+      "types": "./src/locales/es/store/messages.ts",
+      "default": "./src/locales/es/store/messages.ts"
+    },
+    "./locales/fr/store/messages": {
+      "types": "./src/locales/fr/store/messages.ts",
+      "default": "./src/locales/fr/store/messages.ts"
+    },
+    "./locales/en/api/messages": {
+      "types": "./src/locales/en/api/messages.ts",
+      "default": "./src/locales/en/api/messages.ts"
+    },
+    "./locales/es/api/messages": {
+      "types": "./src/locales/es/api/messages.ts",
+      "default": "./src/locales/es/api/messages.ts"
+    },
+    "./locales/fr/api/messages": {
+      "types": "./src/locales/fr/api/messages.ts",
+      "default": "./src/locales/fr/api/messages.ts"
+    },
+    "./locales/en/server/messages": {
+      "types": "./src/locales/en/server/messages.ts",
+      "default": "./src/locales/en/server/messages.ts"
+    },
+    "./locales/es/server/messages": {
+      "types": "./src/locales/es/server/messages.ts",
+      "default": "./src/locales/es/server/messages.ts"
+    },
+    "./locales/fr/server/messages": {
+      "types": "./src/locales/fr/server/messages.ts",
+      "default": "./src/locales/fr/server/messages.ts"
+    },
+    "./locales/en/auth/messages": {
+      "types": "./src/locales/en/auth/messages.ts",
+      "default": "./src/locales/en/auth/messages.ts"
+    },
+    "./locales/es/auth/messages": {
+      "types": "./src/locales/es/auth/messages.ts",
+      "default": "./src/locales/es/auth/messages.ts"
+    },
+    "./locales/fr/auth/messages": {
+      "types": "./src/locales/fr/auth/messages.ts",
+      "default": "./src/locales/fr/auth/messages.ts"
+    },
+    "./locales/en/email/messages": {
+      "types": "./src/locales/en/email/messages.ts",
+      "default": "./src/locales/en/email/messages.ts"
+    },
+    "./locales/es/email/messages": {
+      "types": "./src/locales/es/email/messages.ts",
+      "default": "./src/locales/es/email/messages.ts"
+    },
+    "./locales/fr/email/messages": {
+      "types": "./src/locales/fr/email/messages.ts",
+      "default": "./src/locales/fr/email/messages.ts"
+    },
+    "./locales/en/ui/messages": {
+      "types": "./src/locales/en/ui/messages.ts",
+      "default": "./src/locales/en/ui/messages.ts"
+    },
+    "./locales/es/ui/messages": {
+      "types": "./src/locales/es/ui/messages.ts",
+      "default": "./src/locales/es/ui/messages.ts"
+    },
+    "./locales/fr/ui/messages": {
+      "types": "./src/locales/fr/ui/messages.ts",
+      "default": "./src/locales/fr/ui/messages.ts"
+    },
+    "./locales/en/helpers/messages": {
+      "types": "./src/locales/en/helpers/messages.ts",
+      "default": "./src/locales/en/helpers/messages.ts"
+    },
+    "./locales/es/helpers/messages": {
+      "types": "./src/locales/es/helpers/messages.ts",
+      "default": "./src/locales/es/helpers/messages.ts"
+    },
+    "./locales/fr/helpers/messages": {
+      "types": "./src/locales/fr/helpers/messages.ts",
+      "default": "./src/locales/fr/helpers/messages.ts"
+    }
+  },
+  "scripts": {
+    "dev": "tsgo",
+    "build": "tsgo --build",
+    "lint": "oxlint -c ../../.oxlintrc.json .",
+    "lint:fix": "oxlint -c ../../.oxlintrc.json --fix .",
+    "lint:fix:unsafe": "oxlint -c ../../.oxlintrc.json --fix-dangerously .",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "format:unsafe": "bun run lint:fix:unsafe && bun run format",
+    "typecheck": "tsgo --noEmit",
+    "clean": "rm -rf node_modules dist .turbo .cache"
+  },
+  "dependencies": {
+    "@lingui/core": "catalog:"
+  },
+  "devDependencies": {
+    "@lingui/react": "catalog:",
+    "@repo/typescript-config": "*",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@typescript/native-preview": "catalog:",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "@lingui/react": "catalog:",
+    "react": "catalog:"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "typescript", "unicorn", "oxc", "react", "jsx-a11y"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn"
+  },
+  "env": {
+    "browser": true,
+    "es2026": true,
+    "node": true
+  },
+  "globals": {
+    "Bun": "readonly"
+  },
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/routeTree.gen.ts",
+    "**/.output/**",
+    "**/.tanstack/**",
+    "**/.turbo/**",
+    "**/coverage/**",
+    "**/dist/**",
+    "bun.lock",
+    "effect-smol/**"
+  ],
+  "settings": {
+    "react": {
+      "version": "19.2.5"
+    }
+  },
+  "rules": {
+    "jsx-a11y/anchor-has-content": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/html-has-lang": "off",
+    "jsx-a11y/lang": "off",
+    "jsx-a11y/no-redundant-roles": "off",
+    "jsx-a11y/prefer-tag-over-role": "off",
+    "no-console": "off",
+    "no-shadow": "off",
+    "no-underscore-dangle": "off",
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "preserve-caught-error": "off",
+    "unicorn/consistent-function-scoping": "off",
+    "react/react-in-jsx-scope": "off"
+  }
+}

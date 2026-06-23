@@ -1,0 +1,45 @@
+{
+  "name": "@repo/helpers",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./auth": {
+      "types": "./src/auth.ts",
+      "default": "./src/auth.ts"
+    },
+    "./date": {
+      "types": "./src/date.ts",
+      "default": "./src/date.ts"
+    },
+    "./stale-chunk": {
+      "types": "./src/stale-chunk.ts",
+      "default": "./src/stale-chunk.ts"
+    }
+  },
+  "scripts": {
+    "dev": "tsgo",
+    "build": "tsgo --build",
+    "lint": "oxlint -c ../../.oxlintrc.json .",
+    "lint:fix": "oxlint -c ../../.oxlintrc.json --fix .",
+    "lint:fix:unsafe": "oxlint -c ../../.oxlintrc.json --fix-dangerously .",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "format:unsafe": "bun run lint:fix:unsafe && bun run format",
+    "typecheck": "tsgo --noEmit",
+    "clean": "rm -rf node_modules dist .turbo .cache"
+  },
+  "dependencies": {
+    "date-fns": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "@types/node": "^25.6.0",
+    "@typescript/native-preview": "catalog:",
+    "typescript": "catalog:"
+  }
+}

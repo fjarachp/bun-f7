@@ -1,0 +1,74 @@
+import { trpcServer } from "@hono/trpc-server";
+import { createApi } from "@repo/api/server";
+import { auth } from "@repo/auth/server";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
+import { logger } from "hono/logger";
+import { env } from "./env";
+import { emailApp } from "./routes/email";
+import { webhooksApp } from "./routes/webhooks";
+
+// Build trusted origins from both app URLs
+const trustedOrigins = [new URL(env.PUBLIC_URL_STORE).origin, new URL(env.PUBLIC_URL_ADMIN).origin];
+
+const wildcardPath = {
+  ALL: "*",
+  BETTER_AUTH: "/api/auth/*",
+  TRPC: "/api/trpc/*",
+} as const;
+
+const api = createApi();
+
+const app = new Hono<{
+  Variables: {
+    user: typeof auth.$Infer.Session.user | null;
+    session: typeof auth.$Infer.Session.session | null;
+  };
+}>();
+
+app.get("/healthcheck", (c) => c.text("OK"));
+
+app.use(logger());
+
+app.use(
+  wildcardPath.BETTER_AUTH,
+  cors({
+    origin: trustedOrigins,
+    credentials: true,
+    allowHeaders: ["Content-Type", "Authorization", "Accept-Language", "x-locale"],
+    allowMethods: ["POST", "GET", "OPTIONS"],
+    exposeHeaders: ["Content-Length"],
+    maxAge: 600,
+  }),
+);
+
+app.use(
+  wildcardPath.TRPC,
+  cors({
+    origin: trustedOrigins,
+    credentials: true,
+    allowHeaders: ["Content-Type", "Authorization", "Accept-Language", "x-locale"],
+  }),
+);
+
+app.on(["POST", "GET"], wildcardPath.BETTER_AUTH, (c) => auth.handler(c.req.raw));
+
+app.use(
+  wildcardPath.TRPC,
+  trpcServer({
+    endpoint: "/api/trpc",
+    router: api.trpcRouter,
+    createContext: (c) => api.createTRPCContext({ headers: c.req.headers }),
+  }),
+);
+
+app.get("/", (c) => c.text("Hello Hono!"));
+
+app.route("/api/email", emailApp);
+app.route("/api/webhooks", webhooksApp);
+
+export default {
+  port: env.SERVER_PORT,
+  hostname: env.SERVER_HOST,
+  fetch: app.fetch,
+};

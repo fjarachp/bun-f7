@@ -47,12 +47,12 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "*",
-    "@types/node": "^25.6.0",
+    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@typescript/native-preview": "catalog:",
-    "@vitejs/plugin-react": "^6.0.1",
-    "autoprefixer": "^10.5.0",
+    "@vitejs/plugin-react": "catalog:",
+    "autoprefixer": "catalog:",
     "tailwindcss": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:"

@@ -49,12 +49,12 @@
     "@sendgrid/mail": "^8.1.6",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "react-email": "6.0.5"
+    "react-email": "6.6.4"
   },
   "devDependencies": {
-    "@react-email/ui": "6.0.5",
+    "@react-email/ui": "6.6.4",
     "@repo/typescript-config": "workspace:*",
-    "@types/node": "^25.6.0",
+    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@typescript/native-preview": "catalog:",

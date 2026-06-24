@@ -1,5 +1,5 @@
-const STALE_CHUNK_RELOAD_PREFIX = "pgi-photos:stale-chunk-reload";
-const STALE_CHUNK_HANDLER_KEY = "__pgiPhotosStaleChunkHandlers";
+const STALE_CHUNK_RELOAD_PREFIX = "chp:stale-chunk-reload";
+const STALE_CHUNK_HANDLER_KEY = "__chpStaleChunkHandlers";
 
 const staleChunkPatterns = [
   /ChunkLoadError/i,

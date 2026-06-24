@@ -51,6 +51,10 @@ RUN bun install
 # Copy pruned workspace source files
 COPY --from=builder /app/out/full/ .
 
+# Copy the root Lingui config — turbo prune doesn't include it, but store's
+# vite.config.ts resolves it at ../../lingui.config.ts (i.e. /app/lingui.config.ts)
+COPY --from=builder /app/lingui.config.ts ./lingui.config.ts
+
 # Build the TanStack Start application
 RUN bun turbo build
 

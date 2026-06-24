@@ -32,7 +32,7 @@
     },
     "server#build": {
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [],
+      "outputs": ["dist/**"],
       "env": [
         "DATABASE_URL",
         "SERVER_*",

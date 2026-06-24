@@ -26,7 +26,7 @@
   ],
   "settings": {
     "react": {
-      "version": "19.2.5"
+      "version": "19.2.7"
     }
   },
   "rules": {
@@ -34,6 +34,7 @@
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/html-has-lang": "off",
     "jsx-a11y/lang": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/no-redundant-roles": "off",
     "jsx-a11y/prefer-tag-over-role": "off",
     "no-console": "off",

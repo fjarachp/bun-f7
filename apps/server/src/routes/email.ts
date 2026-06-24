@@ -1,100 +1,114 @@
-import { renderWelcomeEmail, sendEmail } from "@repo/email";
-import { Hono } from "hono";
-import { z } from "zod";
+import { renderWelcomeEmail, sendEmail as deliverEmail } from "@repo/email";
+import { Effect, Schema } from "effect";
+import { HttpServerRequest, HttpServerResponse } from "effect/unstable/http";
 import { env } from "../env";
 
-const LocaleSchema = z.enum(["en", "es", "fr"]);
+const json = (body: unknown, status: number) => HttpServerResponse.jsonUnsafe(body, { status });
 
-const EmailPayloadSchema = z.discriminatedUnion("template", [
-  z.object({
-    template: z.literal("welcome"),
-    props: z.object({
-      appUrl: z.url(),
-      name: z.string().min(1),
+const EmailAddress = Schema.String.check(Schema.isPattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/));
+
+export const SendEmailRequest = Schema.Struct({
+  from: Schema.optional(EmailAddress),
+  locale: Schema.optional(Schema.Literals(["en", "es", "fr"])),
+  payload: Schema.Union([
+    Schema.Struct({
+      template: Schema.Literal("welcome"),
+      props: Schema.Struct({
+        appUrl: Schema.URLFromString,
+        name: Schema.NonEmptyString,
+      }),
     }),
-  }),
-]);
-
-const SendEmailRequestSchema = z.object({
-  from: z.email().optional(),
-  locale: LocaleSchema.optional(),
-  payload: EmailPayloadSchema,
-  replyTo: z.email().optional(),
-  to: z.union([z.email(), z.array(z.email()).min(1)]),
+  ]),
+  replyTo: Schema.optional(EmailAddress),
+  to: Schema.Union([EmailAddress, Schema.NonEmptyArray(EmailAddress)]),
 });
 
-type SendEmailResponse =
-  | {
-      messageId?: string;
-      success: true;
+export const SendEmailSuccess = Schema.Struct({
+  messageId: Schema.optional(Schema.String),
+  success: Schema.Literal(true),
+});
+
+export type SendEmailRequest = Schema.Schema.Type<typeof SendEmailRequest>;
+
+const decodeSendEmailRequest = Schema.decodeUnknownEffect(SendEmailRequest);
+
+const validationError = (error: unknown) =>
+  json(
+    {
+      error: `Validation error: ${String(error)}`,
+      success: false,
+    },
+    400,
+  );
+
+const handleSendEmail = (request: HttpServerRequest.HttpServerRequest, body: SendEmailRequest) =>
+  Effect.gen(function* () {
+    if (!env.EMAIL_API_KEY) {
+      return json({ error: "Email API not configured", success: false }, 503);
     }
-  | {
-      error: string;
-      success: false;
-    };
 
-export const emailApp = new Hono();
+    const apiKey = request.headers["x-email-api-key"];
+    if (apiKey !== env.EMAIL_API_KEY) {
+      return json({ error: "Invalid API key", success: false }, 401);
+    }
 
-emailApp.use("/*", async (c, next) => {
-  if (!env.EMAIL_API_KEY) {
-    return c.json<SendEmailResponse>({ error: "Email API not configured", success: false }, 503);
-  }
+    if (!env.SENDGRID_API_KEY) {
+      return json({ error: "SendGrid not configured", success: false }, 503);
+    }
+    const sendgridApiKey = env.SENDGRID_API_KEY;
 
-  const apiKey = c.req.header("X-Email-Api-Key");
-  if (apiKey !== env.EMAIL_API_KEY) {
-    return c.json<SendEmailResponse>({ error: "Invalid API key", success: false }, 401);
-  }
+    const { from, locale, payload, replyTo, to } = body;
+    const recipients = typeof to === "string" ? to : [...to];
 
-  await next();
-});
+    return yield* Effect.tryPromise({
+      try: async () => {
+        const rendered = await renderWelcomeEmail({
+          appUrl: payload.props.appUrl.toString(),
+          locale,
+          name: payload.props.name,
+        });
 
-emailApp.post("/send", async (c) => {
-  const parsed = SendEmailRequestSchema.safeParse(await c.req.json());
-  if (!parsed.success) {
-    return c.json<SendEmailResponse>(
-      {
-        error: `Validation error: ${parsed.error.issues.map((issue) => issue.message).join(", ")}`,
-        success: false,
+        return deliverEmail({
+          apiKey: sendgridApiKey,
+          from: from ?? env.EMAIL_FROM,
+          html: rendered.html,
+          replyTo,
+          subject: rendered.subject,
+          text: rendered.text,
+          to: recipients,
+        });
       },
-      400,
+      catch: (error) => error,
+    }).pipe(
+      Effect.match({
+        onFailure: (error) => {
+          console.error("[EMAIL] Send failed:", error);
+          return json(
+            {
+              error: error instanceof Error ? error.message : "Unknown error",
+              success: false,
+            },
+            500,
+          );
+        },
+        onSuccess: (result) => ({
+          messageId: result.messageId,
+          success: true as const,
+        }),
+      }),
     );
-  }
+  });
 
-  if (!env.SENDGRID_API_KEY) {
-    return c.json<SendEmailResponse>({ error: "SendGrid not configured", success: false }, 503);
-  }
-
-  const { from, locale, payload, replyTo, to } = parsed.data;
-
-  try {
-    const rendered = await renderWelcomeEmail({
-      appUrl: payload.props.appUrl,
-      locale,
-      name: payload.props.name,
-    });
-
-    const result = await sendEmail({
-      apiKey: env.SENDGRID_API_KEY,
-      from: from ?? env.EMAIL_FROM,
-      html: rendered.html,
-      replyTo,
-      subject: rendered.subject,
-      text: rendered.text,
-      to,
-    });
-
-    return c.json<SendEmailResponse>({
-      messageId: result.messageId,
-      success: true,
-    });
-  } catch (error) {
-    console.error("[EMAIL] Send failed:", error);
-    return c.json<SendEmailResponse>(
-      {
-        error: error instanceof Error ? error.message : "Unknown error",
-        success: false,
-      },
-      500,
-    );
-  }
-});
+export const handleSendEmailRequest = (request: HttpServerRequest.HttpServerRequest) =>
+  request.json.pipe(
+    Effect.matchEffect({
+      onFailure: (error) => Effect.succeed(validationError(error)),
+      onSuccess: (body) =>
+        decodeSendEmailRequest(body).pipe(
+          Effect.matchEffect({
+            onFailure: (error) => Effect.succeed(validationError(error)),
+            onSuccess: (payload) => handleSendEmail(request, payload),
+          }),
+        ),
+    }),
+  );

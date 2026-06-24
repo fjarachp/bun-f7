@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
-    "build": "tsgo --noEmit",
+    "build": "bun build --target=bun --outdir=dist src/index.ts",
     "lint": "oxlint -c ../../.oxlintrc.json .",
     "lint:fix": "oxlint -c ../../.oxlintrc.json --fix .",
     "lint:fix:unsafe": "oxlint -c ../../.oxlintrc.json --fix-dangerously .",
@@ -11,15 +11,16 @@
     "format:check": "oxfmt --check .",
     "format:unsafe": "bun run lint:fix:unsafe && bun run format",
     "typecheck": "tsgo --noEmit",
-    "clean": "rm -rf node_modules dist .turbo"
+    "clean": "rm -rf node_modules dist .turbo",
+    "docker:build": "docker build -t chp-server -f Dockerfile ../.."
   },
   "dependencies": {
-    "@hono/trpc-server": "^0.4.2",
     "@repo/api": "workspace:*",
     "@repo/auth": "workspace:*",
     "@repo/db": "workspace:*",
     "@repo/email": "workspace:*",
-    "hono": "^4.12.16",
+    "@trpc/server": "catalog:",
+    "effect": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {

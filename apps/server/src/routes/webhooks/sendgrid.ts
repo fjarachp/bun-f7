@@ -1,49 +1,64 @@
 import { verifySendGridEventWebhookSignature } from "@repo/email";
-import { Hono } from "hono";
+import { Effect, Schema } from "effect";
+import { HttpServerRequest, HttpServerResponse } from "effect/unstable/http";
 import { env } from "../../env";
 
-const app = new Hono();
+const json = (body: unknown, status: number) => HttpServerResponse.jsonUnsafe(body, { status });
 
-app.post("/", async (c) => {
-  const rawBody = await c.req.text();
-  const signature = c.req.header("x-twilio-email-event-webhook-signature");
-  const timestamp = c.req.header("x-twilio-email-event-webhook-timestamp");
-
-  if (!(signature && timestamp)) {
-    return c.json({ error: "Missing SendGrid signature headers" }, 400);
-  }
-
-  if (!env.SENDGRID_EVENT_WEBHOOK_SIGNING_KEY) {
-    console.error("[SENDGRID WEBHOOK] Missing SENDGRID_EVENT_WEBHOOK_SIGNING_KEY");
-    return c.json({ error: "Webhook not configured" }, 500);
-  }
-
-  const isValidSignature = verifySendGridEventWebhookSignature({
-    payload: rawBody,
-    publicKey: env.SENDGRID_EVENT_WEBHOOK_SIGNING_KEY,
-    signature,
-    timestamp,
-  });
-
-  if (!isValidSignature) {
-    return c.json({ error: "Invalid signature" }, 401);
-  }
-
-  let parsedBody: unknown;
-  try {
-    parsedBody = JSON.parse(rawBody);
-  } catch (error) {
-    console.error("[SENDGRID WEBHOOK] Invalid JSON payload", error);
-    return c.json({ error: "Invalid JSON payload" }, 400);
-  }
-
-  if (!Array.isArray(parsedBody)) {
-    return c.json({ error: "Expected an array of events" }, 400);
-  }
-
-  console.log(`[SENDGRID WEBHOOK] Received ${parsedBody.length} event(s)`);
-
-  return c.json({ received: true });
+export const SendGridWebhookSuccess = Schema.Struct({
+  received: Schema.Literal(true),
 });
 
-export { app as sendgridWebhookApp };
+const handleRawBody = (request: HttpServerRequest.HttpServerRequest, rawBody: string) =>
+  Effect.gen(function*() {
+    const signature = request.headers["x-twilio-email-event-webhook-signature"];
+    const timestamp = request.headers["x-twilio-email-event-webhook-timestamp"];
+
+    if (!(signature && timestamp)) {
+      return json({ error: "Missing SendGrid signature headers" }, 400);
+    }
+
+    if (!env.SENDGRID_EVENT_WEBHOOK_SIGNING_KEY) {
+      console.error("[SENDGRID WEBHOOK] Missing SENDGRID_EVENT_WEBHOOK_SIGNING_KEY");
+      return json({ error: "Webhook not configured" }, 500);
+    }
+
+    const isValidSignature = verifySendGridEventWebhookSignature({
+      payload: rawBody,
+      publicKey: env.SENDGRID_EVENT_WEBHOOK_SIGNING_KEY,
+      signature,
+      timestamp,
+    });
+
+    if (!isValidSignature) {
+      return json({ error: "Invalid signature" }, 401);
+    }
+
+    let parsedBody: unknown;
+    try {
+      parsedBody = JSON.parse(rawBody);
+    } catch (error) {
+      console.error("[SENDGRID WEBHOOK] Invalid JSON payload", error);
+      return json({ error: "Invalid JSON payload" }, 400);
+    }
+
+    if (!Array.isArray(parsedBody)) {
+      return json({ error: "Expected an array of events" }, 400);
+    }
+
+    yield* Effect.logInfo(`[SENDGRID WEBHOOK] Received ${parsedBody.length} event(s)`);
+
+    return { received: true as const };
+  });
+
+export const handleSendGridWebhook = (request: HttpServerRequest.HttpServerRequest) =>
+  request.text.pipe(
+    Effect.matchEffect({
+      onFailure: (error) =>
+        Effect.sync(() => {
+          console.error("[SENDGRID WEBHOOK] Failed to read request body", error);
+          return json({ error: "Invalid request body" }, 400);
+        }),
+      onSuccess: (rawBody) => handleRawBody(request, rawBody),
+    }),
+  );

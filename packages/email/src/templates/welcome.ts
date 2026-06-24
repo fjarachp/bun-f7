@@ -31,8 +31,8 @@ const createTranslate = (i18n?: I18nInstance): TranslateFn =>
   i18n ? (descriptor) => i18n._(descriptor) : formatFallbackMessage;
 
 const welcomeSubjectMessage = /*i18n*/ {
-  id: "Welcome to PGI Photos",
-  message: "Welcome to PGI Photos",
+  id: "Welcome to CHP",
+  message: "Welcome to CHP",
 };
 
 const welcomeHeadingMessage = (name: string) => /*i18n*/ ({
@@ -42,8 +42,8 @@ const welcomeHeadingMessage = (name: string) => /*i18n*/ ({
 });
 
 const accountReadyMessage = /*i18n*/ {
-  id: "Your PGI Photos account is ready.",
-  message: "Your PGI Photos account is ready.",
+  id: "Your CHP account is ready.",
+  message: "Your CHP account is ready.",
 };
 
 const continueMessage = /*i18n*/ {
@@ -52,8 +52,8 @@ const continueMessage = /*i18n*/ {
 };
 
 const ctaMessage = /*i18n*/ {
-  id: "Open PGI Photos",
-  message: "Open PGI Photos",
+  id: "Open CHP",
+  message: "Open CHP",
 };
 
 const ignoreMessage = /*i18n*/ {

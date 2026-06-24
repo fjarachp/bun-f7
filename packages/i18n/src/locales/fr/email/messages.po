@@ -20,13 +20,13 @@ msgstr "Si vous n'avez pas créé ce compte, vous pouvez ignorer cet e-mail."
 
 #. js-lingui-explicit-id
 #: packages/email/src/templates/welcome.ts:54
-msgid "Open PGI Photos"
-msgstr "Ouvrir PGI Photos"
+msgid "Open CHP"
+msgstr "Ouvrir CHP"
 
 #. js-lingui-explicit-id
 #: packages/email/src/templates/welcome.ts:33
-msgid "Welcome to PGI Photos"
-msgstr "Bienvenue sur PGI Photos"
+msgid "Welcome to CHP"
+msgstr "Bienvenue sur CHP"
 
 #. js-lingui-explicit-id
 #: packages/email/src/templates/welcome.ts:38
@@ -40,5 +40,5 @@ msgstr "Vous pouvez maintenant vous connecter pour organiser vos photos et repre
 
 #. js-lingui-explicit-id
 #: packages/email/src/templates/welcome.ts:44
-msgid "Your PGI Photos account is ready."
-msgstr "Votre compte PGI Photos est prêt."
+msgid "Your CHP account is ready."
+msgstr "Votre compte CHP est prêt."

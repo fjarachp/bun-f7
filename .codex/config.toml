@@ -1,3 +1,3 @@
 [mcp_servers.dbhub]
 command = "dbhub"
-args = ["--transport", "stdio", "--dsn", "postgres://postgres:postgres@localhost:5432/pgi-photos"]
+args = ["--transport", "stdio", "--dsn", "postgres://postgres:postgres@localhost:5432/chp"]

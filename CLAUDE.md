@@ -8,7 +8,7 @@ This is a Turborepo monorepo with three applications and shared packages:
 
 ### Applications
 
-- **server** - Bun/Hono API server on port 3035
+- **server** - Effect HTTP API server on Bun, port 3035 (hosts tRPC, Better Auth routes, and email/webhook endpoints)
 - **store** - TanStack Start store on port 3000
 - **admin** - TanStack Start admin dashboard on port 3001
 
@@ -17,7 +17,7 @@ This is a Turborepo monorepo with three applications and shared packages:
 - **@repo/ui** - Shared React component library
 - **@repo/typescript-config** - Shared TypeScript configurations
 - **@repo/api** - tRPC API layer with type-safe procedures
-- **@repo/auth** - Better Auth authentication system with Drizzle adapter
+- **@repo/auth** - Better Auth authentication system with Drizzle adapter (see `packages/auth/README.md` for subdomain cookie auth)
 - **@repo/db** - Drizzle ORM database layer with PostgreSQL
 - **@repo/helpers** - Cross-cutting utilities
 
@@ -71,15 +71,31 @@ bun run docker:build
 turbo run docker:build
 
 # Build individual Docker images
-bun run docker:build:server  # (when Dockerfile exists)
+bun run docker:build:server
 bun run docker:build:store
 bun run docker:build:admin
 
-# Run Docker containers
-bun run docker:run:server    # (when Dockerfile exists)
+# Run Docker containers (pass runtime env via --env-file .env.local)
+bun run docker:run:server    # http://localhost:3035
 bun run docker:run:store     # http://localhost:3000
 bun run docker:run:admin     # http://localhost:3001
 ```
+
+### Database Commands
+
+```bash
+# Start/stop local PostgreSQL (compose.yaml)
+bun run infra:up
+bun run infra:down
+
+# Apply schema changes to the database — the ONLY db command Claude runs
+bun run db:push
+
+# Open Drizzle Studio
+bun run db:studio
+```
+
+**IMPORTANT:** `bun run db:push` is the only database schema command Claude should run. Do **NOT** run `bun run db:generate` or `bun run db:migrate` — the user handles migration generation and migrations.
 
 ### Single App Development
 
@@ -154,30 +170,37 @@ turbo gen react-component
 
 ### Environment Variables Configuration
 
-This project follows Turborepo best practices for environment variable management:
-
-- **Package-specific .env files** - No root-level .env file to prevent variable leakage
-- **Environment validation** - Each package uses Zod for type-safe environment validation
-- **Turborepo configuration** - Environment variables are specified per task in `turbo.json`
+- **Single root `.env.local`** — all local env vars live in the repo-root `.env.local` (gitignored). Copy `.env.example` to `.env.local` to get started.
+- **Workspace symlinks** — each app/package that reads env keeps its own `.env.local` symlink to `../../.env.local`, so Vite, Bun, and drizzle-kit load the same values from any cwd. Do **not** add per-package `.env` files.
+- **Loaded via dotenv-cli** — root scripts run `dotenv -e .env.local -- turbo run <task>`, so every workspace task sees the same environment.
+- **Environment validation** — each package validates its own slice with Zod (`@t3-oss/env-core` for the Vite client envs).
+- **Turborepo allow-lists** — `turbo.json` declares which vars each task may read (for cache correctness).
 
 #### File Structure
 
+```text
+.env.local                       # single source of truth (gitignored)
+.env.example                     # committed template
+
+apps/server/.env.local           → ../../.env.local   (symlink)
+apps/store/.env.local            → ../../.env.local   (symlink)
+apps/admin/.env.local            → ../../.env.local   (symlink)
+packages/db/.env.local           → ../../.env.local   (symlink)
 ```
-apps/server/.env          # Server-specific variables (DATABASE_URL, SERVER_*, PUBLIC_WEB_URL)
-apps/store/.env           # Frontend-specific variables (PUBLIC_*, VITE_*)
-packages/db/.env          # Database package variables (DATABASE_URL for migrations)
+
+Recreate a symlink locally with:
+
+```bash
+ln -sf ../../.env.local apps/<app>/.env.local
+ln -sf ../../.env.local packages/db/.env.local
 ```
 
-#### Environment Files
+#### Env Validation Locations
 
-- `apps/server/src/env.ts` - Zod schema for server environment validation
-- `apps/store/src/env.ts` - Zod schema for store environment validation
-- `packages/db/src/env.ts` - Zod schema for database environment validation
+- `apps/server/src/env.ts` — server runtime (Zod)
+- `apps/store/src/env/{client,server}.ts` — store client/server env
+- `apps/admin/src/env/{client,server}.ts` — admin client/server env
+- `packages/auth/src/env.ts` — Better Auth (incl. `AUTH_COOKIE_DOMAIN` for cross-subdomain cookies — see `packages/auth/README.md`)
+- `packages/db/src/env.ts` — Drizzle / `db:push`
 
-#### Turborepo Configuration
-
-Each task in `turbo.json` specifies required environment variables:
-
-- Server tasks: `["DATABASE_URL", "SERVER_*", "PUBLIC_WEB_URL"]`
-- Store tasks: `["PUBLIC_*", "VITE_*"]`
-- Database tasks: `["DATABASE_URL"]`
+When adding a variable, update root `.env.local`, `.env.example`, the matching Zod schema, and the relevant task `env` array in `turbo.json`.

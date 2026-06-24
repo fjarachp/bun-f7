@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "*",
-    "@types/node": "^25.6.0",
+    "@types/node": "catalog:",
     "@types/pg": "catalog:",
     "@typescript/native-preview": "catalog:",
     "dotenv-cli": "catalog:",

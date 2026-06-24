@@ -35,7 +35,7 @@ export const envSchema = z.object({
   SENDGRID_EVENT_WEBHOOK_SIGNING_KEY: optionalEnvString,
   EMAIL_FROM: z.preprocess(
     (value) => (value === "" ? undefined : value),
-    z.email().default("noreply@pixiepostgreetings.com"),
+    z.email().default("noreply@cherryhillprograms.com"),
   ),
   EMAIL_API_KEY: z.preprocess(
     (value) => (value === "" ? undefined : value),

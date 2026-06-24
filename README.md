@@ -1,274 +1,191 @@
-# mono
+# chp
 
-A modern full-stack monorepo built with cutting-edge technologies for scalable web applications. This repository demonstrates the power of combining TanStack Start, tRPC, Drizzle ORM, and Better Auth in a Turborepo structure with Bun as the runtime.
-
-## 🚀 Vision
-
-This project aims to be a comprehensive example of modern web development practices, featuring:
-
-- **Type-safe full-stack development** with tRPC and TypeScript
-- **Modern React patterns** with TanStack Start for server-side rendering
-- **Database-first approach** with Drizzle ORM and PostgreSQL
-- **Secure authentication** with Better Auth and OAuth providers
-- **Containerized deployment** with Docker and Bun optimization
-- **Production-ready CI/CD** with comprehensive testing and monitoring
+A full-stack TypeScript monorepo for Cherry Hill Programs, built on Bun and Turborepo. It pairs an
+Effect-powered HTTP API with type-safe tRPC, Drizzle ORM, Better Auth, and two TanStack Start
+frontends.
 
 ## 📦 What's Inside
 
 ### Applications
 
-- **`server`** - Hono API server with Bun runtime on port 3035
-- **`store`** - TanStack Start application with file-based routing for SSR/SSG capabilities
+- **`server`** — Effect HTTP API on Bun (port **3035**). A single Bun web handler built from Effect v4's
+  `HttpRouter`, hosting a typed `HttpApi` (health, email, webhooks), the tRPC router at `/api/trpc/*`,
+  and Better Auth at `/api/auth/*`.
+- **`store`** — TanStack Start storefront (port **3000**), SSR via Vite + Nitro.
+- **`admin`** — TanStack Start admin dashboard (port **3001**), SSR via Vite + Nitro.
 
 ### Packages
 
-#### Current
+- **`@repo/api`** — tRPC routers and procedures, run on an Effect `ManagedRuntime` of domain services.
+- **`@repo/auth`** — Better Auth configuration with the Drizzle adapter (client + server helpers).
+- **`@repo/db`** — Drizzle ORM schema, migrations, seeds, and database clients (incl. an Effect SQL layer).
+- **`@repo/email`** — React Email templates and SendGrid helpers.
+- **`@repo/helpers`** — Cross-cutting utilities (auth, dates, stale-chunk handling).
+- **`@repo/i18n`** — Lingui catalogs and locale helpers (en/es/fr).
+- **`@repo/ui`** — Shared React component library (shadcn/ui-style, Tailwind v4).
+- **`@repo/typescript-config`** — Centralized TypeScript configurations.
 
-- **`@repo/ui`** - Shared React component library with shadcn/ui
-- **`@repo/typescript-config`** - Centralized TypeScript configurations
+## 🧰 Tech Stack
 
-#### Planned (See [TODO.md](./TODO.md))
-
-- **`@repo/api`** - tRPC API layer with type-safe procedures
-- **`@repo/auth`** - Better Auth authentication system
-- **`@repo/db`** - Drizzle ORM database layer
-
-### Tech Stack
-
-- **Runtime**: [Bun](https://bun.sh/) for server apps, Node.js for TanStack Start
-- **Framework**: TanStack Start, Hono
-- **Database**: PostgreSQL with [Drizzle ORM](https://orm.drizzle.team/)
-- **Authentication**: [Better Auth](https://www.better-auth.com/) with OAuth support
-- **API**: [tRPC](https://trpc.io/) for end-to-end type safety
-- **UI**: [Tailwind CSS v4](https://tailwindcss.com/) with [shadcn/ui](https://ui.shadcn.com/)
-- **Package Manager**: Bun workspaces with catalog feature
-- **Build Tool**: [Turborepo](https://turbo.build/repo) for monorepo orchestration
-- **Code Quality**: [Oxlint](https://oxc.rs/docs/guide/usage/linter) and [Oxfmt](https://oxc.rs/docs/guide/usage/formatter) for linting and formatting
-- **Containerization**: Docker with Bun-optimized images
+- **Runtime / package manager**: [Bun](https://bun.sh/) (v1.3.14+), Node.js >= 22
+- **Monorepo**: [Turborepo](https://turbo.build/repo) with Bun workspaces + catalog
+- **API transport**: [Effect](https://effect.website/) v4 HTTP API (`effect/unstable/httpapi`) + [tRPC](https://trpc.io/)
+- **Frontend**: [TanStack Start](https://tanstack.com/start/latest) (Vite + Nitro)
+- **Database**: PostgreSQL with [Drizzle ORM](https://orm.drizzle.team/) (+ `@effect/sql-pg`)
+- **Auth**: [Better Auth](https://www.better-auth.com/)
+- **UI**: [Tailwind CSS v4](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)
+- **i18n**: [Lingui](https://lingui.dev/)
+- **Email**: [React Email](https://react.email/) + SendGrid
+- **Code quality**: [Oxlint](https://oxc.rs/docs/guide/usage/linter) + [Oxfmt](https://oxc.rs/docs/guide/usage/formatter)
+- **Containers**: Docker with Bun-optimized multi-stage images
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- **Bun** v1.3.4+ (recommended package manager and runtime)
-- **Node.js** v22+ (for Next.js apps)
-- **Docker** (for PostgreSQL and Redis via `bun run infra:up`)
+- **Bun** v1.3.14+
+- **Node.js** v22+
+- **Docker** (for local PostgreSQL via `bun run infra:up`)
 
 ### Installation
 
-Clone the repository and install dependencies:
-
 ```bash
 git clone <repository-url>
-cd mono
+cd chp
 bun install
 ```
 
 ### Environment Variables
 
-This project follows Turborepo best practices for environment variables by using **package-specific .env files** instead of a root-level configuration. This prevents environment variable leakage across applications and improves cache efficiency.
-
-#### Setup Environment Files
-
-Copy the example files and configure them for your environment:
+All local environment variables live in a **single repo-root `.env.local`** (gitignored). Each app and
+package keeps a `.env.local` symlink to `../../.env.local`, so Vite, Bun, and drizzle-kit resolve the
+same values from any working directory. Do **not** create per-package `.env` files.
 
 ```bash
-# Server environment variables
-cp apps/server/.env.example apps/server/.env
+# 1. Create your local env from the template
+cp .env.example .env.local
 
-# Store environment variables
-cp apps/store/.env.example apps/store/.env
-
-# Database environment variables (for migrations)
-cp packages/db/.env.example packages/db/.env
+# 2. (If missing) recreate the per-workspace symlinks
+ln -sf ../../.env.local apps/server/.env.local
+ln -sf ../../.env.local apps/store/.env.local
+ln -sf ../../.env.local apps/admin/.env.local
+ln -sf ../../.env.local packages/db/.env.local
 ```
 
-#### Configuration Structure
-
-- **`apps/server/.env`** - Server-specific variables (database URL, auth secrets, API settings)
-- **`apps/store/.env`** - Frontend-specific variables (API URLs, public configuration)
-- **`packages/db/.env`** - Database package variables (used by Drizzle migrations and studio)
-
-Each package includes Zod-based environment validation to ensure type safety and proper configuration.
-
-### Development
-
-Start all applications in development mode:
-
-```bash
-# Start all apps simultaneously
-bun run dev
-
-# Or with Turbo directly
-turbo dev
-```
-
-Start individual applications:
-
-```bash
-# Hono server (port 3035)
-turbo dev --filter=server
-
-# TanStack Start app
-turbo dev --filter=store
-```
-
-### Build
-
-Build all applications and packages:
-
-```bash
-# Build everything
-bun run build
-
-# Build specific app
-turbo build --filter=server
-turbo build --filter=store
-```
-
-### Code Quality
-
-The project uses Oxlint for linting and Oxfmt for formatting:
-
-```bash
-# Lint all code
-bun run lint
-
-# Format all code
-bun run format
-
-# Check formatting without writing files
-bun run format:check
-
-# Type check all packages
-bun run typecheck
-```
+Each package validates its own slice of the environment with Zod (`@t3-oss/env-core` for the Vite
+client envs). Root scripts load `.env.local` via `dotenv -e .env.local -- turbo run <task>`.
 
 ### Database
 
-Start the local PostgreSQL database and Redis using Docker:
-
 ```bash
-# Start PostgreSQL and Redis containers
+# Start / stop local PostgreSQL (compose.yaml)
 bun run infra:up
-
-# Stop PostgreSQL and Redis containers
 bun run infra:down
+
+# Apply schema changes (the only schema command used in day-to-day dev)
+bun run db:push
+
+# Inspect data
+bun run db:studio
 ```
 
-Local connection strings:
+> **Migrations:** `bun run db:push` syncs the schema directly and is the default for local development.
+> `bun run db:generate` and `bun run db:migrate` are run intentionally by a maintainer when managing
+> versioned migrations.
+
+Local connection string (matches `compose.yaml`):
 
 ```bash
-DATABASE_URL=postgres://postgres:postgres@localhost:5432/pgi-photos
-REDIS_URL=redis://localhost:6379/0
+DATABASE_URL=postgres://postgres:postgres@localhost:5432/chp
 ```
-
-### Docker Development
-
-The project includes Docker support for containerized development and deployment:
-
-```bash
-# Build all Docker images
-bun run docker:build
-
-# Build individual images
-bun run docker:build:store
-
-# Run containers
-bun run docker:run:store   # http://localhost:3000
-```
-
-## 🗺️ Roadmap
-
-This project follows a structured development approach with clear priorities. See [TODO.md](./TODO.md) for the complete roadmap.
-
-### Current Status
-
-- ✅ Turborepo monorepo structure
-- ✅ Hono API server with Bun
-- ✅ TanStack Start application with file-based routing
-- ✅ shadcn/ui component library
-- ✅ Oxlint linting and Oxfmt formatting
-- ✅ Auto-generated file exclusion in Oxlint/Oxfmt config
-- 🚧 Docker containerization (store app completed)
-
-### Next Milestones
-
-1. **Core Infrastructure** - tRPC API, Drizzle ORM, Better Auth, Docker setup
-2. **Development Experience** - Testing framework, CI/CD, environment management
-3. **Production Ready** - Monitoring, deployment, performance optimization
-4. **Enhancements** - Advanced UI patterns, developer tools, analytics
-
-## 🏗️ Project Structure
-
-```
-mono/
-├── apps/
-│   ├── server/       # Hono API server (Bun)
-│   └── store/        # TanStack Start application
-├── packages/
-│   ├── ui/           # Shared React components
-│   └── typescript-config/ # TypeScript configurations
-├── TODO.md           # Comprehensive development roadmap
-└── CLAUDE.md         # AI assistant instructions
-```
-
-## 🚢 Deployment
 
 ### Development
 
-All applications run locally with hot reload enabled:
+```bash
+# Start every app with hot reload
+bun run dev
 
-- Store app: <http://localhost:3000> (TanStack Start)
-- Server API: <http://localhost:3035>
+# Or a single app
+turbo dev --filter=server   # http://localhost:3035
+turbo dev --filter=store    # http://localhost:3000
+turbo dev --filter=admin    # http://localhost:3001
+```
 
-### Production (Planned)
+### Build, Lint, Typecheck
 
-- **Frontend**: Vercel deployment for TanStack Start app
-- **Backend**: Docker containers on Railway/Fly.io
-- **Database**: PostgreSQL with automated backups
-- **CDN**: Static assets via Vercel Edge Network
+```bash
+bun run build          # build all apps and packages
+bun run lint           # Oxlint
+bun run format         # Oxfmt (write)
+bun run format:check   # Oxfmt (check only)
+bun run typecheck      # tsgo --noEmit across packages
+```
 
-## 🤝 Contributing
+### Internationalization (Lingui)
 
-This project serves as a reference implementation for modern full-stack development. Contributions that align with the roadmap in [TODO.md](./TODO.md) are welcome.
+```bash
+bun run lingui:extract   # extract message catalogs from source
+bun run lingui:compile   # compile catalogs for runtime
+```
 
-### Development Workflow
+### Docker
 
-1. Install dependencies: `bun install`
-2. Start development servers: `bun run dev`
-3. Make changes following existing patterns
-4. Run quality checks: `bun run lint && bun run typecheck`
-5. Test your changes across all affected applications
-6. Build Docker images for deployment: `bun run docker:build`
+```bash
+# Build all images
+bun run docker:build
+
+# Build individual images
+bun run docker:build:server
+bun run docker:build:store
+bun run docker:build:admin
+
+# Run containers (runtime env via --env-file .env.local)
+bun run docker:run:server   # http://localhost:3035
+bun run docker:run:store    # http://localhost:3000
+bun run docker:run:admin    # http://localhost:3001
+```
+
+## 🏗️ Project Structure
+
+```text
+chp/
+├── apps/
+│   ├── server/       # Effect HTTP API (Bun) — tRPC, auth, email, webhooks
+│   ├── store/        # TanStack Start storefront
+│   └── admin/        # TanStack Start admin dashboard
+├── packages/
+│   ├── api/          # tRPC routers + Effect domain services
+│   ├── auth/         # Better Auth (Drizzle adapter)
+│   ├── db/           # Drizzle ORM schema, clients, migrations
+│   ├── email/        # React Email templates + SendGrid
+│   ├── helpers/      # Cross-cutting utilities
+│   ├── i18n/         # Lingui catalogs + locale helpers
+│   ├── ui/           # Shared React component library
+│   └── typescript-config/
+├── compose.yaml      # Local PostgreSQL (+ Redis)
+├── turbo.json        # Turborepo task graph
+├── CLAUDE.md         # AI assistant / contributor guide
+└── AGENTS.md         # Repository guidelines
+```
+
+## 🔌 Server API Surface
+
+The `server` app exposes one Bun `fetch` handler composed from Effect's `HttpRouter`:
+
+| Route                         | Purpose                                                   |
+| ----------------------------- | --------------------------------------------------------- |
+| `GET /healthcheck`            | Liveness probe (typed `HttpApi` endpoint)                 |
+| `POST /api/email/send`        | Transactional email (gated by `X-Email-Api-Key`)          |
+| `POST /api/webhooks/sendgrid` | SendGrid event webhook (raw-body signature verification)  |
+| `ALL /api/trpc/*`             | tRPC router (SuperJSON), backed by Effect domain services |
+| `ALL /api/auth/*`             | Better Auth handler                                       |
 
 ## 📚 Resources
 
-### Core Technologies
-
-- [Turborepo Documentation](https://turbo.build/repo/docs)
-- [Bun Runtime](https://bun.sh/docs)
-- [TanStack Start](https://tanstack.com/start/latest)
-- [tRPC](https://trpc.io/)
-- [Drizzle ORM](https://orm.drizzle.team/)
-- [Better Auth](https://www.better-auth.com/)
-
-### Development Tools
-
-- [shadcn/ui Components](https://ui.shadcn.com/)
-- [Tailwind CSS v4](https://tailwindcss.com/)
-- [Oxlint](https://oxc.rs/docs/guide/usage/linter)
-- [Oxfmt](https://oxc.rs/docs/guide/usage/formatter)
+- [Bun](https://bun.sh/docs) · [Turborepo](https://turbo.build/repo/docs) · [Effect](https://effect.website/)
+- [TanStack Start](https://tanstack.com/start/latest) · [tRPC](https://trpc.io/) · [Drizzle ORM](https://orm.drizzle.team/)
+- [Better Auth](https://www.better-auth.com/) · [Tailwind CSS](https://tailwindcss.com/) · [shadcn/ui](https://ui.shadcn.com/)
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
-
-# bun-f7
-
-# bun-f7
-
-# bun-f7
-# bun-f7
-# bun-f7
-# bun-f7
+Proprietary — © Cherry Hill Programs.
